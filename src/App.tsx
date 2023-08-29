@@ -16,13 +16,18 @@ function App() {
     letter => !wordToGuess.includes(letter)
   )
 
+  const isLoser = incorrectLetters.length >= 6;
+  const isWinner = wordToGuess
+    .split('')
+    .every(letter => guessLetters.includes(letter));
+
   const addGuessLetter = useCallback((letter: string) => {
-    if (guessLetters.includes(letter)) {
+    if (guessLetters.includes(letter) || isLoser || isWinner) {
       return
     } else {
       setGuessLetters(currentLetters => [...currentLetters, letter])
     }
-  }, [guessLetters])
+  }, [guessLetters, isLoser, isWinner])
 
   // keyboard event handler
   useEffect(() => {
@@ -57,17 +62,22 @@ function App() {
         fontSize: '2rem',
         textAlign: 'center'
       }}>
-        Lose
-        Win
+        {isWinner && 'Winner!'}
+        {isLoser && 'Loser!'}
       </div>
       {/* I want to know how many times I chose the wrong letter */}
       <HangmanDraw numberOfGuess={incorrectLetters.length} />
-      <HangmanWord guessLetters={guessLetters} wordToGuess={wordToGuess} />
+      <HangmanWord
+        result={isLoser}
+        guessLetters={guessLetters}
+        wordToGuess={wordToGuess}
+      />
       <div style={{ alignSelf: 'stretch' }}>
-        <Keyboard 
-        activeLetter={guessLetters.filter(letter => wordToGuess.includes(letter))}
-        inactiveLetter={incorrectLetters}
-        addGuessLetter={addGuessLetter}
+        <Keyboard
+          disabled={isWinner || isLoser}
+          activeLetter={guessLetters.filter(letter => wordToGuess.includes(letter))}
+          inactiveLetter={incorrectLetters}
+          addGuessLetter={addGuessLetter}
         />
       </div>
     </div>

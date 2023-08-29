@@ -1,9 +1,10 @@
 type HangmanWordProps = {
   guessLetters: string[],
-  wordToGuess: string
+  wordToGuess: string,
+  result?: boolean
 }
 
-const HangmanWord = ({guessLetters, wordToGuess}: HangmanWordProps) => {
+const HangmanWord = ({ guessLetters, wordToGuess, result = false }: HangmanWordProps) => {
   return (
     <div style={{
       display: 'flex',
@@ -16,9 +17,10 @@ const HangmanWord = ({guessLetters, wordToGuess}: HangmanWordProps) => {
       {wordToGuess.split('').map((letter, index) => (
         <span style={{ borderBottom: '.6rem solid black' }} key={index}>
           <span style={{
-            visibility: guessLetters.includes(letter)
+            visibility: guessLetters.includes(letter) || result
               ? 'visible'
-              : 'hidden'
+              : 'hidden',
+            color: !guessLetters.includes(letter) && result ? 'red' : 'black'
           }}>
             {letter}
           </span>
