@@ -5,7 +5,7 @@ const HEAD = (
     borderRadius: '100%',
     border: '7px solid black',
     position: 'absolute',
-    top: '50px',
+    top: '45px',
     right: '-20px'
   }} />
 )
@@ -13,10 +13,10 @@ const HEAD = (
 const BODY = (
   <div style={{
     width: '10px',
-    height: '120px',
+    height: '130px',
     background: 'black',
     position: 'absolute',
-    top: '100px',
+    top: '90px',
     right: '0'
   }} />
 )
@@ -32,6 +32,7 @@ const RIGHT_ARM = (
       right: "-90px",
       rotate: "-30deg",
       transformOrigin: "left bottom",
+      borderRadius: '12px'
     }}
   />
 )
@@ -47,6 +48,7 @@ const LEFT_ARM = (
       right: "10px",
       rotate: "30deg",
       transformOrigin: "right bottom",
+      borderRadius: '12px'
     }}
   />
 )
@@ -62,6 +64,7 @@ const RIGHT_LEG = (
       right: "-90px",
       rotate: "60deg",
       transformOrigin: "left bottom",
+      borderRadius: '12px'
     }}
   />
 )
@@ -77,6 +80,7 @@ const LEFT_LEG = (
       right: 0,
       rotate: "-60deg",
       transformOrigin: "right bottom",
+      borderRadius: '12px'
     }}
   />
 )
@@ -97,7 +101,8 @@ const HangmanDraw = ({ numberOfGuess }: HangmanDrawProps) => {
         background: 'black',
         position: 'absolute',
         top: '0',
-        right: '0'
+        right: '0',
+        borderRadius: '12px'
       }} />
 
       <div style={{
@@ -117,7 +122,8 @@ const HangmanDraw = ({ numberOfGuess }: HangmanDrawProps) => {
       <div style={{
         height: '10px',
         width: '250px',
-        background: 'black'
+        background: 'black',
+        borderRadius: '12px'
       }} />
     </div>
   )

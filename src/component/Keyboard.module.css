@@ -1,7 +1,8 @@
 .btn {
     width: 100%;
     border: 3px solid black;
-    background: none;
+    border-radius: 17px;
+    background: transparent;
     aspect-ratio: 1 / 1;
     font-size: 2.5rem;
     text-transform: uppercase;
@@ -12,7 +13,7 @@
 }
 
 .btn.active {
-    background-color: hsl(200, 100%, 50%);
+    background-color: #6366F1;
     color: white;
 }
 
@@ -22,5 +23,5 @@
 
 .btn:hover:not(:disabled),
 .btn:focus:not(:disabled) {
-    background-color: hsl(200, 100%, 75%);
+    background-color: #818CF8;
 }

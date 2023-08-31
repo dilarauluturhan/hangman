@@ -43,11 +43,7 @@ const Keyboard = ({
   disabled = false
 }: KeyboardProps) => {
   return (
-    <div style={{
-      display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fit, minmax(75px, 1fr))',
-      gap: '.5rem'
-    }}>
+    <div className='grid grid-cols-75 gap-2'>
       {KEYS.map(key => {
         const isActive = activeLetter.includes(key);
         const isInactive = inactiveLetter.includes(key);

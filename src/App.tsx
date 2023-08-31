@@ -3,6 +3,7 @@ import words from './wordList.json';
 import HangmanDraw from './component/HangmanDraw';
 import HangmanWord from './component/HangmanWord';
 import Keyboard from './component/Keyboard';
+import { Toaster, toast } from 'react-hot-toast';
 
 function App() {
   const [wordToGuess, setWordToGuess] = useState(() => {
@@ -37,8 +38,8 @@ function App() {
       if (!key.match(/^[a-z]$/)) {
         return
       } else {
-        e.preventDefault()
-        addGuessLetter(key)
+        e.preventDefault();
+        addGuessLetter(key);
       }
     }
 
@@ -47,38 +48,43 @@ function App() {
     return () => {
       document.removeEventListener("keypress", handler)
     }
-  }, [guessLetters])
+  }, [guessLetters]);
+
+  useEffect(() => {
+    if (isWinner) {
+      toast.success('Congratulations, you won!', {
+        duration: 5000
+      });
+    }
+  }, [isWinner]);
+
+  useEffect(() => {
+    if (isLoser) {
+      toast.error('You lost, please refresh the page!', {
+        duration: 5000
+      })
+    }
+  }, [isLoser, wordToGuess]);
 
   return (
-    <div style={{
-      maxWidth: '800px',
-      display: 'flex',
-      alignItems: 'center',
-      flexDirection: 'column',
-      gap: '2rem',
-      margin: '1rem auto'
-    }}>
-      <div style={{
-        fontSize: '2rem',
-        textAlign: 'center'
-      }}>
-        {isWinner && 'Winner!'}
-        {isLoser && 'Loser!'}
-      </div>
-      {/* I want to know how many times I chose the wrong letter */}
-      <HangmanDraw numberOfGuess={incorrectLetters.length} />
-      <HangmanWord
-        result={isLoser}
-        guessLetters={guessLetters}
-        wordToGuess={wordToGuess}
-      />
-      <div style={{ alignSelf: 'stretch' }}>
-        <Keyboard
-          disabled={isWinner || isLoser}
-          activeLetter={guessLetters.filter(letter => wordToGuess.includes(letter))}
-          inactiveLetter={incorrectLetters}
-          addGuessLetter={addGuessLetter}
+    <div className='bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-blue-100 via-indigo-100 to-purple-200 h-screen'>
+      <div className='font-adlam max-w-3xl flex items-center flex-col gap-8 mx-auto pt-12'>
+        <Toaster />
+        {/* I want to know how many times I chose the wrong letter */}
+        <HangmanDraw numberOfGuess={incorrectLetters.length} />
+        <HangmanWord
+          result={isLoser}
+          guessLetters={guessLetters}
+          wordToGuess={wordToGuess}
         />
+        <div className='self-stretch'>
+          <Keyboard
+            disabled={isWinner || isLoser}
+            activeLetter={guessLetters.filter(letter => wordToGuess.includes(letter))}
+            inactiveLetter={incorrectLetters}
+            addGuessLetter={addGuessLetter}
+          />
+        </div>
       </div>
     </div>
   )
