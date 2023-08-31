@@ -26,15 +26,15 @@
     background-color: #818CF8;
 }
 
-@media only screen and (max-width: 480px){
+@media only screen and (max-width: 480px) {
     .btn {
         width: 3rem;
         height: 3rem;
         font-size: 1.3rem;
-        aspect-ratio: 0.5;
+        border: 2px solid black;
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-left: 1rem;
+        margin-left: 5px;
     }
 }

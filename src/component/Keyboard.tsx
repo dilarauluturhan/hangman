@@ -43,7 +43,7 @@ const Keyboard = ({
   disabled = false
 }: KeyboardProps) => {
   return (
-    <div className='grid grid-cols-75 gap-2'>
+    <div className='grid grid-cols-6 lg:grid-cols-75 gap-1 lg:gap-2'>
       {KEYS.map(key => {
         const isActive = activeLetter.includes(key);
         const isInactive = inactiveLetter.includes(key);
